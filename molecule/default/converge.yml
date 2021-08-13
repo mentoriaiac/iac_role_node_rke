@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include iac-role-k8s"
+      include_role:
+        name: "iac-role-k8s"

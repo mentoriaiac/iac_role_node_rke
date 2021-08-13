@@ -1,53 +1,33 @@
-# Template Role Ansible
+IaC Role K8s
+=========
 
-![Pipeline Status](https://github.com/mentoriaiac/template-role-ansible/actions/workflows/ci.yml/badge.svg) 
+Essa role é responsável por instalar tudo necessário para ter no nó k8s.
 
-Esse projeto tem a finalidade de ser um template para futuras criações de projetos que usem [ansible](https://docs.ansible.com/) e [molecule](https://molecule.readthedocs.io/en/latest/) (para teste do playbook).
+Requirements
+------------
 
-## Dependências
-Para realizar os teste localmente é necessário a instalação das seguintes dependências:
+N/A
 
-* [Python](https://www.python.org/downloads/)
-* [Molecule](https://molecule.readthedocs.io/en/latest/installation.html)
+Role Variables
+--------------
 
-## Preparando o ambiente
+N/A
 
-Crie um ambiente python
+Dependencies
+------------
 
-```bash
-$ python3 -m venv .venv
-```
-Ative o ambiente
-```bash
-$ source .venv/bin/active
-```
+N/A
 
-Instale dentro do ambiente o molecule (e suas dependencias) e o [pytest-testinfra](https://testinfra.readthedocs.io/en/latest/)
-```bash
-(venv)$ python3 -m pip install "molecule[docker,lint]" pytest-testinfra
-```
+Example Playbook
+----------------
 
-## Criando a role
+Exemplo:
 
-A role precisa ser criada e você pode fazer com o comando abaixo:
+    - hosts: servers
+      roles:
+         - { role: username.rolename, x: 42 }
 
-```bash
-(venv)$ molecule init role nome_da_role --driver-name docker
-```
+License
+-------
 
-## Executando
-```bash
-(venv)$ molecule test
-```
-
-Para realizar teste rápido após alguma modificação
-```bash
-(venv)$ molecule create
-(venv)$ molecule converge
-(venv)$ molecule verify
-```
-
-Ao termino do teste, destrua o ambiente
-```bash
-(venv)$ molecule destroy
-``` 
+BSD
