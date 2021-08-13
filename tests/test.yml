@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - iac-role-k8s
+    - iac_role_k8s

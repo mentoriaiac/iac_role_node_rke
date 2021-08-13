@@ -1,6 +1,6 @@
 galaxy_info:
   author: Rafael Gomes
-  description: Membro 
+  description: Membro
   company: Mentoria de IaC
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -27,18 +27,12 @@ galaxy_info:
   # To view available platforms and versions (or releases), visit:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
-  # platforms:
-  # - name: Fedora
-  #   versions:
-  #   - all
-  #   - 25
-  # - name: SomePlatform
-  #   versions:
-  #   - all
-  #   - 1.0
-  #   - 7
-  #   - 99.99
-
+  platforms:
+   - name: Ubuntu
+     versions:
+     - 18.04
+     - 20.03
+  
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes
     # and categorizes the role. Users find roles by searching for tags. Be sure to
