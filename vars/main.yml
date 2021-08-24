@@ -1,2 +1,3 @@
 ---
-# vars file for iac_role_k8s
+
+ubuntu_release: "{{ ansible_distribution_release }}" # variavel coletada do ansible facts 

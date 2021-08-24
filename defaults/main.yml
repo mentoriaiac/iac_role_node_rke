@@ -1,2 +1,10 @@
 ---
 # defaults file for iac_role_k8s
+
+k8s_version: "1.22.1-00"
+
+docker_ce_version: "5:20.10.8~3-0~ubuntu-{{ ubuntu_release }}"
+
+containerd_version: "1.4.9-1"
+
+rke_release: "https://github.com/rancher/rke/releases/download/v1.1.19/rke_linux-amd64"
