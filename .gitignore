@@ -1,2 +1,4 @@
 .venv/
 .cache/
+.ansible/
+molecule/default/tests/__pycache__/

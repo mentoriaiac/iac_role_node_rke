@@ -91,7 +91,8 @@
     groups: docker
     generate_ssh_key: yes
     shell: /bin/bash
-    comment: "Usuário para criação de cluster RKE"
+    state: present
+    
 
 - name: Baixando o Binario do RKE
   get_url:
