@@ -92,7 +92,6 @@
     generate_ssh_key: yes
     shell: /bin/bash
     state: present
-    
 
 - name: Baixando o Binario do RKE
   get_url:
