@@ -1,6 +1,5 @@
 .venv/
 .cache/
 .ansible/
-molecule/default/tests/*
-!molecule/default/tests/test_rke.py
 .vscode/
+molecule/default/tests/__pycache__
