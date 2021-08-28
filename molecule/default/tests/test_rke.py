@@ -17,7 +17,8 @@ def test_hosts_file(host):
      "/etc/sysctl.d/k8s.conf",
     ):
 
-        f = host.file(name).exists
+        f = host.file(name)
+        assert f.exists
 
 def test_docker_kubectl_is_installed(host):
     
@@ -26,6 +27,7 @@ def test_docker_kubectl_is_installed(host):
 
     for i, name in enumerate(packages):
 
+        
         docker = host.package(name)
         assert docker.is_installed
         assert docker.version.startswith(version[i])
@@ -52,10 +54,11 @@ def test_if_container_is_removed(host):
 
 # Verificando conteudo de arquivos
 
-def test_if_ssh_config_is_ok(host):
+def test_if_ssh__and_k8s_config_is_ok(host):
 
     conteudo = ['AllowTcpForwarding yes','net.bridge.bridge-nf-call-iptables']
     path = ['/etc/ssh/ssh_config','/etc/sysctl.d/k8s.conf']
+
     for i, name in enumerate(path):
 
         file = host.file(name)
