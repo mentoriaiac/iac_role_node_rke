@@ -12,13 +12,19 @@ def test_hosts_file(host):
 
     for name in (
      "/usr/bin/kubectl",
-     "/usr/bin/rke",
      "/etc/docker/daemon.json",
      "/etc/sysctl.d/k8s.conf",
     ):
 
         f = host.file(name)
         assert f.exists
+
+def test_rke_not_exists(host):
+
+    name = "/usr/bin/rke"
+
+    f = host.file(name)
+    assert not f.exists
 
 def test_docker_kubectl_is_installed(host):
     

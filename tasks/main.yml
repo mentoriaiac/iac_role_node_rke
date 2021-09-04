@@ -93,8 +93,8 @@
     shell: /bin/bash
     state: present
 
-- name: Baixando o Binario do RKE
-  get_url:
-    url: "{{ rke_release }}"
-    dest: /usr/bin/rke
-    mode: +x
+- name: Aplicando a chave publica do usuário k8s
+  authorized_key:
+    user: k8s
+    state: present
+    key: https://github.com/mentoriaiacuser.keys
