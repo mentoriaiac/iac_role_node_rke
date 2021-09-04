@@ -27,13 +27,13 @@ def test_rke_not_exists(host):
     assert not f.exists
 
 def test_docker_kubectl_is_installed(host):
-    
+
     version = ['5:20.10','5:20.10','1.4.9','1.22']
     packages = ['docker-ce','docker-ce-cli','containerd.io','kubectl']
 
     for i, name in enumerate(packages):
 
-        
+
         docker = host.package(name)
         assert docker.is_installed
         assert docker.version.startswith(version[i])
