@@ -1,7 +1,8 @@
+
 galaxy_info:
-  author: Rafael Gomes
-  description: Membro
-  company: Mentoria de IaC
+  author: "Felipe Nobrega - Dissipar - Mansur - Victor Braga - Roze Cardoso - Gazzinelli  - Gabriel Iglesias"
+  description: Role para instalar o RKE
+  company: Mentoria IaC
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -14,13 +15,12 @@ galaxy_info:
   # - GPL-3.0-only
   # - Apache-2.0
   # - CC-BY-4.0
-  license: license (GPL-2.0-or-later, MIT, etc)
+  license: GPL-2.0-or-later
 
   min_ansible_version: 2.1
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
-
   #
   # Provide a list of supported platforms, and for each platform a list of versions.
   # If you don't wish to enumerate all versions for a particular platform, use 'all'.
@@ -28,11 +28,10 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-   - name: Ubuntu
-     versions:
-     - 18.04
-     - 20.03
-  
+  - name: Ubuntu
+    versions:
+    - 20.04
+
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes
     # and categorizes the role. Users find roles by searching for tags. Be sure to

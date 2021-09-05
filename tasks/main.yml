@@ -1,2 +1,100 @@
 ---
-# tasks file for iac_role_k8s
+
+- name: Instalação dos pre-req do Docker
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+    state: present
+    update_cache: yes
+
+- name: Configuração do iptables
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: "1"
+    sysctl_file: "/etc/sysctl.d/k8s.conf"
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Adicionando chaves gpg do Docker
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    keyring: /usr/share/keyrings/docker-archive-keyring.gpg
+
+- name: instala o repo do docker
+  apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ ubuntu_release }} stable"
+    state: present
+    filename: docker.list
+
+- name: Criando diretorio /etc/docker
+  file:
+    path: /etc/docker
+    recurse: yes
+    state: directory
+    mode: "0644"
+
+- name: Copy file with owner and permissions
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    mode: "0644"
+
+- name: Instalação do Docker
+  apt:
+    pkg:
+      - "docker-ce={{ docker_ce_version }}"
+      - "docker-ce-cli={{ docker_ce_version }}"
+      - "containerd.io={{ containerd_version }}"
+    state: present
+    update_cache: yes
+
+
+- name: Adicionando chave gpg do K8S
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    keyring: /usr/share/keyrings/kubernetes-archive-keyring.gpg
+
+- name: instala o repo do k8s
+  apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
+    state: present
+    filename: kubernetes.list
+
+- name: Instalação do kubernetes
+  apt:
+    pkg:
+      - "kubeadm={{ k8s_version }}"
+      - "kubectl={{ k8s_version }}"
+    state: present
+    update_cache: yes
+
+- name: Configuração do hold dos pacotes
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  loop:
+    - kubeadm
+    - kubectl
+
+- name: Configuração de SSH solicitada para RKE
+  lineinfile:
+    path: /etc/ssh/ssh_config
+    line: "AllowTcpForwarding yes"
+    backup: yes
+
+- name: Criando usuário do RKE para criação do cluster
+  user:
+    name: k8s
+    groups: docker
+    generate_ssh_key: yes
+    shell: /bin/bash
+    state: present
+
+- name: Aplicando a chave publica do usuário k8s
+  authorized_key:
+    user: k8s
+    state: present
+    key: https://github.com/mentoriaiacuser.keys

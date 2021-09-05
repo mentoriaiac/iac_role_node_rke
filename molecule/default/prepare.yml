@@ -2,9 +2,10 @@
 - name: Prepare
   hosts: all
   pre_tasks:
-    - name: Install gnupg2
+    - name: Install pre-reqs
       apt:
-        name: gnupg2
+        pkg:
+          - gnupg2
+          - lsb-release
+          - kmod
         update_cache: yes
-  roles:
-    - geerlingguy.docker
