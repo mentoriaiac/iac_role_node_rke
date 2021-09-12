@@ -9,14 +9,21 @@
     state: present
     update_cache: yes
 
-- name: Configuração do iptables
-  sysctl:
-    name: net.bridge.bridge-nf-call-iptables
-    value: "1"
-    sysctl_file: "/etc/sysctl.d/k8s.conf"
-    sysctl_set: yes
+- name: Instalação do module BR_Netfilter
+  community.general.modprobe:
+    name: br_netfilter
     state: present
+
+- name: " Configuração do iptables para BR_netfilter"
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    sysctl_set: yes
+    value: "1"
     reload: yes
+    sysctl_file: /etc/sysctl.d/20-net-bridge.conf
+  loop:
+    - "net.bridge.bridge-nf-call-ip6tables"
+    - "net.bridge.bridge-nf-call-iptables"
 
 - name: Adicionando chaves gpg do Docker
   apt_key:
