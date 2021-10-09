@@ -1,0 +1,5 @@
+---
+- name: iac_role_runtime
+  src: https://github.com/mentoriaiac/iac_role_runtime.git
+  scm: git
+  version: v0.1.0

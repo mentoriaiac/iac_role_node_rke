@@ -1,25 +1,18 @@
 ---
 dependency:
   name: galaxy
-  options:
-    ignore-certs: True
-    ignore-errors: True
-    role-file: requirements.yml
 driver:
   name: docker
 platforms:
-  - name: ubuntu-iac-rke 
+  - name: ubuntu-iac-rke
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /var/run/docker.sock:/var/run/docker.sock
-    privileged: true
-    pre_build_image: true
+    privileged: yes
+    pre-build: yes
 provisioner:
   name: ansible
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 verifier:
   name: testinfra
   env:
