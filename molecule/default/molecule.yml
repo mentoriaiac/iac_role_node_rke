@@ -10,7 +10,6 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /var/run/docker.sock:/var/run/docker.sock
-      - /lib/modules/:/lib/modules:ro
     privileged: true
     pre_build_image: true
 provisioner:

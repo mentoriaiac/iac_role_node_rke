@@ -62,8 +62,8 @@ def test_if_container_is_removed(host):
 
 def test_if_ssh__and_k8s_config_is_ok(host):
 
-    conteudo = ['AllowTcpForwarding yes','net.bridge.bridge-nf-call-iptables', 'net.bridge.bridge-nf-call-ip6tables']
-    path = ['/etc/ssh/ssh_config','/etc/sysctl.d/20-net-bridge.conf', '/etc/sysctl.d/20-net-bridge.conf']
+    conteudo = ['AllowTcpForwarding yes','net.bridge.bridge-nf-call-iptables']
+    path = ['/etc/ssh/ssh_config','/etc/sysctl.d/20-net-bridge.conf']
 
     for i, name in enumerate(path):
 
