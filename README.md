@@ -23,65 +23,59 @@ Ao final um diretório com a sua role será criado e você precisa agora entrar 
 
 
 ### Segundo Passo
-Crie um ambiente virtual para o python3. Como o ansible e o molecule são escritos em python, vamos precisar muito de uma estrutura de isolamento, como é o caso do modulo venv do python. Para criar um ambiente python isolado use o comando a seguir:
 
-> python3 -m venv o-nome-da-sua-env
+Para a criação do ambiente virtual do python utilizamos o pipenv.
 
+<https://pipenv.pypa.io/en/latest/>
 
-Você pode colocar o nome que você desejar para seu ambiente virtual, contudo existe uma convenção que estimula você usar este padrão: venv, .venv, env, .env
+Será necessária a instalação do pacote seguindo o seguinte procedimento.
 
-Uma vez criado seu ambiente virtual, precisamos inicializá-lo, para tal, execute o comando a seguir:
+```bash
 
-> source o-nome-da-sua-env/bin/activate
+ pip install pipenv
 
+```
 
-Se tudo der certo, seu pronpt será modificado e iniciará aparentemente assim:
+Crie um ambiente virtual para o python3. Como o ansible e o molecule são escritos em python, vamos precisar muito de uma estrutura de isolamento. Para criar um ambiente python isolado use o comando a seguir com pipenv:
 
-> (o-nome-da-sua-env)$
+```bash
 
-
-Uma vez criado e inicializado o seu ambiente precisamos instalar todas as dependências necessárias para tudo acontecer certinho. As dependências desta role está gravada no arquivo ***requirements.txt***. Para instalar as dependências use o comando a seguir:
-
-> (o-nome-da-sua-env)$ python3 -m pip install --upgrade pip
-
-> (o-nome-da-sua-env)$ python3 -m pip install -r requirements.txt
+python3 -m pipenv install
 
 
+```
+
+Esse comando irá instalar os requiriments localizados no Pipfile, ele funciona de forma parecida com o requirements do python pip.
 ### Terceiro Passo
-Para verificar se tudo aconteceu bem, você pode executar o comando a seguir:
 
-> (o-nome-da-sua-env)$ molecule check
+O pipenv aceita dois comandos de interação
 
+pipenv run -> Executa um comando dentro do ambiente virtual
 
-Ele ira executar um ciclo interiro de testes (dependency, cleanup, destroy, create, prepare, converge, check, cleanup, destroy)
+pipenv shell -> Acessa o ambiente virtual
+
+Para os comandos diretos do molecule vamos utilizar o pipenv run.
 
 ### Quarto Passo
+
 Para realizar teste rápido após alguma modificação execute a seguinte sequência de comandos:
 
-> (o-nome-da-sua-env)$ molecule create
+```bash
 
-> (o-nome-da-sua-env)$ molecule converge
+pipenv run molecule create
 
-> (o-nome-da-sua-env)$ molecule verify
+pipenv run molecule converge
 
+pipenv run molecule verify
 
-Ao termino do teste, destrua o ambiente
-
-> (o-nome-da-sua-env)$ molecule destroy
-
-
-> (o-nome-da-sua-env)$ molecule check
-
-
-Para realizar teste rápido após alguma modificação
-
-> (o-nome-da-sua-env)$ molecule create
-
-> (o-nome-da-sua-env)$ molecule converge
-
-> (o-nome-da-sua-env)$ molecule verify
-
+```
 
 Ao termino do teste, destrua o ambiente
 
-> (o-nome-da-sua-env)$ molecule destroy
+```bash
+
+pipenv run molecule destroy
+
+pipenv run molecule test
+
+```

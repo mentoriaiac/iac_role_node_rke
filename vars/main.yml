@@ -1,3 +1,0 @@
----
-
-ubuntu_release: "{{ ansible_distribution_release }}" # variavel coletada do ansible facts 

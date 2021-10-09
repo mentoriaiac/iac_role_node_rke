@@ -1,10 +1,6 @@
 ---
 dependency:
   name: galaxy
-  options:
-    ignore-certs: True
-    ignore-errors: True
-    role-file: requirements.yml
 driver:
   name: docker
 platforms:
@@ -19,8 +15,6 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 verifier:
   name: testinfra
   env:
