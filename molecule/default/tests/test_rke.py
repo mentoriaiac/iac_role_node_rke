@@ -12,9 +12,8 @@ def test_hosts_file(host):
 
     for name in (
      "/usr/bin/kubectl",
-     "/usr/bin/rke",
      "/etc/docker/daemon.json",
-     "/etc/sysctl.d/k8s.conf",
+     "/etc/sysctl.d/20-net-bridge.conf",
     ):
 
         f = host.file(name)
@@ -57,7 +56,7 @@ def test_if_container_is_removed(host):
 def test_if_ssh__and_k8s_config_is_ok(host):
 
     conteudo = ['AllowTcpForwarding yes','net.bridge.bridge-nf-call-iptables']
-    path = ['/etc/ssh/ssh_config','/etc/sysctl.d/k8s.conf']
+    path = ['/etc/ssh/ssh_config','/etc/sysctl.d/20-net-bridge.conf']
 
     for i, name in enumerate(path):
 
