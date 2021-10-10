@@ -1,7 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include iac_role_k8s"
-      include_role:
-        name: "iac-role-node-rke"
+  roles:
+    - iac_role_node_rke
