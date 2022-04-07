@@ -6,7 +6,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-#Verificando binarios, arquivos e versões
+# Verificando binarios, arquivos e versões
 
 def test_hosts_file(host):
 
@@ -60,7 +60,7 @@ def test_if_container_is_removed(host):
 
 # Verificando conteudo de arquivos
 
-def test_if_ssh__and_k8s_config_is_ok(host):
+def test_if_ssh_and_k8s_config_is_ok(host):
 
     conteudo = ['AllowTcpForwarding yes','net.bridge.bridge-nf-call-iptables']
     path = ['/etc/ssh/ssh_config','/etc/sysctl.d/20-net-bridge.conf']
