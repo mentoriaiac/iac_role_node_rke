@@ -1,18 +1,18 @@
 ---
 
 - name: Adicionando chave gpg do K8S
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
     keyring: /usr/share/keyrings/kubernetes-archive-keyring.gpg
 
 - name: instala o repo do k8s
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
     state: present
     filename: kubernetes.list
 
 - name: Instalação do kubernetes
-  apt:
+  ansible.builtin.apt:
     pkg:
       - "kubeadm={{ k8s_version }}"
       - "kubectl={{ k8s_version }}"
@@ -20,7 +20,7 @@
     update_cache: yes
 
 - name: Configuração do hold dos pacotes
-  dpkg_selections:
+  ansible.builtin.dpkg_selections:
     name: "{{ item }}"
     selection: hold
   loop:
@@ -28,13 +28,13 @@
     - kubectl
 
 - name: Configuração de SSH solicitada para RKE
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/ssh/ssh_config
     line: "AllowTcpForwarding yes"
     backup: yes
 
 - name: Criando usuário do RKE para criação do cluster
-  user:
+  ansible.builtin.user:
     name: k8s
     groups: docker
     generate_ssh_key: yes
@@ -42,7 +42,7 @@
     state: present
 
 - name: Aplicando a chave publica do usuário k8s
-  authorized_key:
+  ansible.builtin.authorized_key:
     user: k8s
     state: present
     key: https://github.com/mentoriaiacuser.keys
