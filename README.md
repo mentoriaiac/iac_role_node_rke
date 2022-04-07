@@ -4,78 +4,42 @@ IaC Role RKE
 Essa role é responsável por instalar tudo necessário para ter no nó de RKE(Rancher Kubernetes Engine).
 
 ## Dependências
-
 Para realizar os teste localmente é necessário a instalação das seguintes dependências:
 
-    Python
-    Molecule
+* [Python](https://www.python.org/downloads/)
+* [Molecule](https://molecule.readthedocs.io/en/latest/installation.html)
 
 ## Preparando o ambiente
 
-### Primeiro Passo:
-
-Clone este repositório, ele é a base da role do nomad.
-> git clone https://github.com/mentoriaiac/iac-role-node-rke
-
-
-Ao final um diretório com a sua role será criado e você precisa agora entrar neste novo diretório. Para fazer isto use o comando a seguir:
-> cd iac-role-node-rke
-
-
-### Segundo Passo
-
-Para a criação do ambiente virtual do python utilizamos o pipenv.
-
-<https://pipenv.pypa.io/en/latest/>
-
-Será necessária a instalação do pacote seguindo o seguinte procedimento.
+Crie um ambiente python
 
 ```bash
-
- pip install pipenv
-
+$ python3 -m venv .venv
+```
+Ative o ambiente
+```bash
+$ source .venv/bin/activate
 ```
 
-Crie um ambiente virtual para o python3. Como o ansible e o molecule são escritos em python, vamos precisar muito de uma estrutura de isolamento. Para criar um ambiente python isolado use o comando a seguir com pipenv:
-
+Instale dentro do ambiente o molecule (e suas dependencias) e o [pytest-testinfra](https://testinfra.readthedocs.io/en/latest/)
 ```bash
-
-python3 -m pipenv install
-
-
+(venv)$ python3 -m pip install -r requirements.txt
 ```
 
-Esse comando irá instalar os requiriments localizados no Pipfile, ele funciona de forma parecida com o requirements do python pip.
-### Terceiro Passo
-
-O pipenv aceita dois comandos de interação
-
-pipenv run -> Executa um comando dentro do ambiente virtual
-
-pipenv shell -> Acessa o ambiente virtual
-
-Para os comandos diretos do molecule vamos utilizar o pipenv run.
-
-### Quarto Passo
-
-Para realizar teste rápido após alguma modificação execute a seguinte sequência de comandos:
-
+## Executando
 ```bash
+(venv)$ molecule test
+```
 
-pipenv run molecule create
-
-pipenv run molecule converge
-
-pipenv run molecule verify
-
+Para realizar teste rápido após alguma modificação
+```bash
+(venv)$ molecule create
+(venv)$ molecule converge
+(venv)$ molecule verify
 ```
 
 Ao termino do teste, destrua o ambiente
-
 ```bash
+(venv)$ molecule destroy
+``` 
 
-pipenv run molecule destroy
-
-pipenv run molecule test
-
-```
